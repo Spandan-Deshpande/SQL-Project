@@ -74,7 +74,7 @@ All figures below describe a deterministic **synthetic** dataset, not Cummins op
 
 Reproduce with `python run.py`, then `python -m unittest discover -s tests -v`.
 '''
-    (reports/'summary.md').write_text(summary,encoding='utf-8')
+    (reports/'summary.md').write_text(summary,encoding='utf-8',newline='\n')
     build_dir=ROOT/'build'; build_dir.mkdir(exist_ok=True)
     with sqlite3.connect(build_dir/'fleet.db') as target:
         db.backup(target)
