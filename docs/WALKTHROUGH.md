@@ -1,6 +1,8 @@
-# Project walkthrough
+# Fleet Maintenance Analytics — technical walkthrough
 
-## Explain the project in one minute
+**Maintainer: Spandan Mukesh Deshpande**
+
+## Overview
 
 This project models a small equipment fleet and uses SQL to analyze service costs, availability, repeated faults, and preventive-service thresholds. It has six core relational tables and a staging table. The demonstration contains 36,000 asset-day observations generated deterministically. Eight SQL queries produce CSV reports.
 
@@ -26,7 +28,7 @@ The central correctness issue is table grain: an order may contain several parts
 
 Ratios use aggregate numerators and denominators, not averages of per-asset percentages. NULLIF protects against zero denominators.
 
-## SQL techniques to understand
+## Query design
 
 - ROW_NUMBER chooses exactly one valid observation per asset/day.
 - LAG finds the previous matching failure, without a self-join.
@@ -35,14 +37,18 @@ Ratios use aggregate numerators and denominators, not averages of per-asset perc
 - ROWS 6 PRECEDING creates a seven-row rolling window. It only equals seven days when dates are dense.
 - LEFT JOIN retains days without work orders; COALESCE turns absent cost and downtime into zero.
 
-## Tests worth discussing
+## Validation
 
 The suite verifies quality accounting, referential integrity, join grain, cost reconciliation, latest-valid-row handling, 30-day repeat boundaries, absent service history, zero-hour denominators, and query execution. The CI report check verifies deterministic output.
 
-## What would change for production?
+## Possible extensions
 
 Store start/end timestamps and merge overlapping downtime intervals before aggregation. Use actual shift calendars. Add incremental loads, meter-reset detection, currency handling, and observed service history. PostgreSQL would support a larger multi-user deployment, but SQLite is sufficient for this demonstration.
 
-## Before listing this project in an interview
+## Experimenting with the analysis
 
-Read each query, run the workflow, inspect a CSV, and explain the grain and formulas in your own words. Change one business rule (for example, a 14-day repeat-fault window) and predict its effect before running it. The dataset is simulated, and the project does not demonstrate measured cost savings or predictive accuracy.
+The repeat-fault window in `sql/queries/04_repeat_faults.sql` is 30 days. Changing it to 14 days gives a stricter definition of recurrence. Compare the exported rows to see which events disappear.
+
+Service thresholds come from `assets.service_interval_hours`. Different intervals change the service-due report without changing the maintenance history.
+
+After modifying a business rule, rebuild the reports, inspect the affected outputs and run the test suite. Update the committed reports only when the differences match the intended change.

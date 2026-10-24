@@ -64,7 +64,7 @@ def export(db):
     audit = db.execute('SELECT * FROM quality_audit').fetchone()
     summary = f'''# Reproduced results
 
-All figures below describe a deterministic **synthetic** dataset, not Cummins operations.
+All figures below describe a deterministic **synthetic** fleet dataset.
 
 - 200 assets across 4 depots, 180 days (January 1–June 29, 2026).
 - {audit[0]:,} raw usage records; {audit[1]:,} rejected invalid rows; {audit[2]:,} superseded duplicate rows.

@@ -1,6 +1,6 @@
 # Reproduced results
 
-All figures below describe a deterministic **synthetic** dataset, not Cummins operations.
+All figures below describe a deterministic **synthetic** fleet dataset.
 
 - 200 assets across 4 depots, 180 days (January 1–June 29, 2026).
 - 36,480 raw usage records; 120 rejected invalid rows; 360 superseded duplicate rows.

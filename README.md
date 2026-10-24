@@ -1,12 +1,14 @@
 # Fleet Maintenance Analytics
 
+**A personal project by [Spandan Mukesh Deshpande](https://github.com/Spandan-Deshpande)**
+
 [![Validate SQL analytics](https://github.com/Spandan-Deshpande/SQL-Project/actions/workflows/validate.yml/badge.svg)](https://github.com/Spandan-Deshpande/SQL-Project/actions/workflows/validate.yml)
 
-A SQL portfolio project that turns equipment usage and service records into maintenance cost, availability, and service-planning reports.
+A SQL workspace for exploring how equipment usage, repairs and parts costs affect a fleet over time. It brings daily operating records and maintenance history into one relational model, then turns them into reports that can be inspected and reproduced.
 
-**Dataset:** 200 simulated assets, four depots, 180 days, and 1,219 work orders. All data is synthetic. This is an independent learning project, not a Cummins system or a claim of operational savings.
+**Dataset:** 200 simulated assets, four depots, 180 days, and 1,219 work orders. All data is synthetic. The figures illustrate the analysis; they do not represent a real fleet or measured savings.
 
-## Questions answered
+## What the project explores
 
 - Which depots spend the most per operating hour?
 - Which failure categories account for the largest share of corrective maintenance cost?
@@ -76,8 +78,10 @@ Service intervals and cost distributions are illustrative. The six-month window 
 - `sql/03_views.sql`: safe reporting joins and audit counts
 - `sql/queries/`: eight business analyses
 - `tests/`: edge cases and reconciliation checks
-- [Walkthrough](docs/WALKTHROUGH.md): explain the implementation and tradeoffs
+- [Technical walkthrough](docs/WALKTHROUGH.md): data flow, formulas and implementation tradeoffs
 
-## Context and authorship
+## Maintainer
 
-Built as an original portfolio project with AI-assisted development and documentation. The business context was inspired by public descriptions of [Cummins PrevenTech](https://www.cummins.com/en-in/news/2023/09/22/improve-your-cost-production-cummins-preventechr), which discusses equipment availability and maintenance planning. No proprietary Cummins data or code is used.
+[Spandan Mukesh Deshpande](https://github.com/Spandan-Deshpande)
+
+Development and documentation used AI assistance. The schema, synthetic dataset and analyses are maintained together in this repository.
